@@ -1,11 +1,10 @@
 import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import PokemonTypes from '../types/PokemonTypes';
-import PokemonProfile from '../pokemon/PokemonProfile';
 import PokemonImage from '../pokemon/PokemonImage';
+import PokemonProfile from '../pokemon/PokemonProfile';
+import PokemonTypes from '../types/PokemonTypes';
+import Link from 'next/link';
 
-function PokemonTile({ pokemon }) {
+function GridTile({ pokemon }) {
   return (
     <div className="text-sm flex flex-col p-2.5 items-center justify-center">
       <Link href={`/pokemon/${pokemon.id}`}>
@@ -25,4 +24,4 @@ function PokemonTile({ pokemon }) {
   );
 }
 
-export default PokemonTile;
+export default GridTile;

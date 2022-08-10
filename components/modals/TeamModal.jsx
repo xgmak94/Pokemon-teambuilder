@@ -4,15 +4,23 @@ import { useGlobalContext } from '../GlobalStore';
 import CreatableSelect from 'react-select/creatable';
 
 function AddTeamModal({ pokemonName, setShowModal }) {
+  let { teams } = useGlobalContext();
+
   let options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
+    { value: 'chocolate', label: 'chocolate' },
+    { value: 'strawberry', label: 'strawberry' },
+    { value: 'vanilla', label: 'vanilla' },
   ];
+
+  for (const key in teams) {
+    options.push({
+      value: key,
+      label: key,
+    });
+  }
+
   const [selectedOption, setSelectedOption] = useState(null);
   const [error, setError] = useState(false);
-
-  let { teams, setTeams } = useGlobalContext();
 
   let [selectedTeam, setSelectedTeam] = useState('');
   function hideModal(e) {
@@ -22,7 +30,10 @@ function AddTeamModal({ pokemonName, setShowModal }) {
   }
 
   function selectingTeam(inputValue, actionMeta) {
-    if(actionMeta.action === 'menu-close' || actionMeta.action === 'input-blur') {
+    if (
+      actionMeta.action === 'menu-close' ||
+      actionMeta.action === 'input-blur'
+    ) {
       return;
     }
 
@@ -41,7 +52,7 @@ function AddTeamModal({ pokemonName, setShowModal }) {
       let obj = {
         ...prev,
       };
-      if(!obj[selectedTeam]) {
+      if (!obj[selectedTeam]) {
         obj[selectedTeam] = [];
       }
       //can do error checking on length of array < 6

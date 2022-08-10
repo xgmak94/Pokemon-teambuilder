@@ -6,8 +6,8 @@ import NavBar from '../components/header/NavBar';
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <NavBar />
       <GlobalContextProvider>
+        <NavBar />
         <Component {...pageProps} />
       </GlobalContextProvider>
     </>

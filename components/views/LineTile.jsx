@@ -2,7 +2,8 @@ import React from 'react';
 import PokemonImage from '../pokemon/PokemonImage';
 import PokemonTypes from '../types/PokemonTypes';
 import Link from 'next/link';
-function SearchTile({ pokemon }) {
+
+function LineTile({ pokemon }) {
   return (
     <span className="grid grid-cols-4 place-items-center ">
       <div>{padId(pokemon.id)}</div>
@@ -32,4 +33,4 @@ function padId(id) {
   return paddedId;
 }
 
-export default SearchTile;
+export default LineTile;

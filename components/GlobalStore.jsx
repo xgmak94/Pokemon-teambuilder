@@ -10,6 +10,7 @@ export function useGlobalContext() {
 }
 
 export function GlobalContextProvider({ children }) {
+  const [view, setView] = useState(false);
   const [allPokemon, setAllPokemon] = useState([]);
   const [allAbilities, setAllAbilities] = useState([]);
   const [allTypes, setAllTypes] = useState([]);
@@ -83,10 +84,12 @@ export function GlobalContextProvider({ children }) {
       setAllTypes,
       teams,
       setTeams,
+      view,
+      setView,
       pokedex,
       // eslint-disable-next-line react-hooks/exhaustive-deps
     };
-  }, [allPokemon, allAbilities, allTypes, teams]);
+  }, [allPokemon, allAbilities, allTypes, teams, view]);
 
   return (
     <GlobalContext.Provider value={value}>

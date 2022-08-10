@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useGlobalContext } from '../components/GlobalStore.jsx';
-import PokemonTile from '../components/grid/PokemonTile.jsx';
-import SearchTile from '../components/search/SearchTile.jsx';
+import Grid from '../components/views/Grid';
+import Line from '../components/views/Line';
 
 function Home() {
-  const { allPokemon } = useGlobalContext();
+  const { allPokemon, view } = useGlobalContext();
   const [search, setSearch] = useState('');
   const [filtered, setFiltered] = useState([]);
-  const [view, setView] = useState(false);
 
   useEffect(() => {
     if (search.length >= 2) {
@@ -19,40 +18,23 @@ function Home() {
     } else {
       setFiltered([]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, view]);
 
   function handleChange(e) {
     setSearch(e.target.value);
   }
 
-  function handleView() {
-    setView((prev) => !prev);
-  }
-
   function filteredList() {
-    let info = filtered.map((pokemon) => {
-      if (view) {
-        return <PokemonTile key={pokemon.name} pokemon={pokemon} />;
-      } else {
-        return <SearchTile key={pokemon.name} pokemon={pokemon} />;
-      }
-    });
-
     if (view) {
-      return <div className="grid grid-cols-3">{info}</div>;
+      return <Grid filtered={filtered} />;
     } else {
-      return <div>{info}</div>;
+      return <Line filtered={filtered} />;
     }
   }
 
   return (
     <div className="flex flex-col justify-center">
-      <button
-        className="rounded-full bg-slate-500"
-        onClick={handleView}
-      >
-        Change view
-      </button>
       <div className="flex justify-center mt-5">
         <input
           className="h-1/6 w-3/5 rounded-full text-center text-4xl"
@@ -61,7 +43,7 @@ function Home() {
           onChange={(e) => handleChange(e)}
         />
       </div>
-      {filteredList()}
+      <div>{filteredList()}</div>
     </div>
   );
 }
