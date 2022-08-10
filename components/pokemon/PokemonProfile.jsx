@@ -3,7 +3,7 @@ import React from 'react';
 function PokemonProfile({ id, name }) {
   return (
     <>
-      <div className="pokemon-id">{padId(id)}</div>
+      <div>{padId(id)}</div>
       <div className="capitalize">{name}</div>
     </>
   );

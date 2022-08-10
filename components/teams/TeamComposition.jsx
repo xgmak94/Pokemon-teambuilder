@@ -1,12 +1,16 @@
 import React from 'react';
 import TeamTile from './TeamTile';
+import TeamPlaceholder from './TeamPlaceholder';
 
-function TeamComposition({ team }) {
+function TeamComposition({ teamName, teamMembers }) {
   return (
-    <div className="flex flex-row">
-      {team.map((member) => {
-        return <TeamTile key={member} pokemonName={member} />;
+    <div className="grid grid-cols-6">
+      {teamMembers.map((member, idx) => {
+        return <TeamTile key={`member${idx}`} teamName={teamName} pokemonName={member} />;
       })}
+      {teamMembers.length < 6 ? (
+        <TeamPlaceholder teamName={teamName} />
+      ) : null}
     </div>
   );
 }

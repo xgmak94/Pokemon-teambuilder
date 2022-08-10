@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useGlobalContext } from '../GlobalStore';
 import CreatableSelect from 'react-select/creatable';
 
-function AddTeamModal({ pokemonName, width, height, setShowModal }) {
+function AddTeamModal({ pokemonName, setShowModal }) {
   let options = [
     { value: 'chocolate', label: 'Chocolate' },
     { value: 'strawberry', label: 'Strawberry' },
@@ -48,10 +48,9 @@ function AddTeamModal({ pokemonName, width, height, setShowModal }) {
       obj[selectedTeam].push(pokemonName);
       return obj;
     });
+    setShowModal(false);
   }
 
-  console.log('selected team is', selectedTeam);
-  console.log(teams);
   return (
     <div
       className="grid fixed w-screen h-screen z-[1]"

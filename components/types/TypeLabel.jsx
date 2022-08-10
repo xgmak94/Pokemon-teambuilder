@@ -4,16 +4,18 @@ import Link from 'next/link';
 function TypeLabel({ type }) {
   return (
     <>
-      <Link href={`/types/${type}`}>
-        <div
-          className="flex text-[18px] hover:text-[24px] justify-center rounded-full w-20 h-6 capitalize font-bold m-[2px] cursor-pointer"
-          style={{
-            backgroundColor: typeColors[type],
-          }}
-        >
-          {type}
-        </div>
-      </Link>
+      {type === '???' ? null : (
+        <Link href={`/types/${type}`}>
+          <div
+            className="flex text-[18px] hover:text-[24px] justify-center rounded-full w-20 h-6 capitalize font-bold m-[2px] cursor-pointer"
+            style={{
+              backgroundColor: typeColors[type],
+            }}
+          >
+            {type}
+          </div>
+        </Link>
+      )}
     </>
   );
 }

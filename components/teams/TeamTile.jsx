@@ -14,11 +14,9 @@ function TeamTile({ pokemonName }) {
     let idx = allPokemon.findIndex((poke) => {
       return poke.name === pokemonName;
     });
-    console.log(idx);
     setPokemon(allPokemon[idx]);
-  }, []);
+  }, [allPokemon, pokemonName]);
 
-  console.log(pokemon);
   return (
     <>
       {pokemon && (
@@ -28,8 +26,8 @@ function TeamTile({ pokemonName }) {
               <div className="flex cursor-pointer justify-center">
                 <PokemonImage
                   images={pokemon.sprites}
-                  width={200}
-                  height={200}
+                  width={100}
+                  height={100}
                 />
               </div>
             </Link>
