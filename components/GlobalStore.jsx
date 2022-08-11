@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import Pokedex from 'pokedex-promise-v2';
 
-const SERVER_URL = 'http://localhost:3000';
+const SERVER_URL = 'http://localhost:3001';
+const NUM_POKEMON = 898; //151 || 898
 
 export const GlobalContext = React.createContext();
 
@@ -20,26 +21,27 @@ export function GlobalContextProvider({ children }) {
     test: [
       {
         name: 'charizard',
-        moves: ['Cut', 'Cut', 'Cut', 'Cut'],
-      },
-      {
-        name: 'venusaur',
-        moves: ['Cut', 'Cut', 'Cut', 'Cut'],
+        moves: ['Flamethrower', 'Focus Blast', 'Solar Beam', 'Roost'],
       },
       {
         name: 'mewtwo',
+        moves: ['Psystrike', 'Ice Beam', 'Fire Blast', 'Calm Mind'],
       },
       {
-        name: 'mew',
+        name: 'ditto',
+        moves: ['Transform'],
+      },
+      {
+        name: 'gyarados',
+        moves: ['Dragon Dance', 'Bounce', 'Waterfall', 'Earthquake'],
       },
     ],
   });
 
   useEffect(() => {
     async function getAllPokemon() {
-      //151 898
       let results = await axios.get(`${SERVER_URL}/pokemon`, {
-        params: { limit: 898 },
+        params: { limit: NUM_POKEMON },
       });
       setAllPokemon(results.data);
     }

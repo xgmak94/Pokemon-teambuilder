@@ -10,12 +10,12 @@ function ImageModal({ images, width, height, setShowModal }) {
 
   return (
     <div
-      className="grid fixed w-screen h-screen z-[1]"
+      id="background"
+      className="grid place-items-center bg-slate-800/75 mt-5 backdrop-blur-sm fixed top-0 left-0 w-screen h-screen z-[1]"
       onClick={(e) => hideModal(e)}
     >
       <div
-        id="background"
-        className="grid place-items-center bg-slate-800/80"
+        className="grid place-items-center p-5 bg-slate-800/5 mt-5 backdrop-blur-sm"
       >
         <div className="grid place-items-center">
           <Image

@@ -66,19 +66,18 @@ function AddTeamModal({ pokemonName, setShowModal }) {
   }
 
   function handleEnter(e) {
-    if(e.code === 'Enter') {
+    if (e.code === 'Enter') {
       addTeam();
     }
   }
+
   return (
     <div
-      className="grid fixed top-0 w-screen h-screen z-[1]"
+      id="background"
+      className="grid place-items-center bg-slate-800/75 mt-5 backdrop-blur-sm fixed top-0 left-0 w-screen h-screen z-[1]"
       onClick={(e) => hideModal(e)}
     >
-      <div
-        id="background"
-        className="grid place-items-center bg-slate-800/80"
-      >
+      <div className="grid place-items-center p-5 bg-slate-800/5 mt-5 backdrop-blur-sm">
         <div className="grid place-items-center">
           <div className="flex flex-col text-xl justify-center text-center">
             <div>{`Select the team `}</div>
@@ -90,7 +89,7 @@ function AddTeamModal({ pokemonName, setShowModal }) {
             onChange={selectingTeam}
             onInputChange={selectingTeam}
             options={options}
-            onKeyDown={e => handleEnter(e)}
+            onKeyDown={(e) => handleEnter(e)}
           />
           <button
             className="rounded-full h-[10vh] w-[25vw] text-xl bg-slate-700"

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useGlobalContext } from '../GlobalStore';
+import PokemonProfile from '../pokemon/PokemonProfile';
 import PokemonImage from '../pokemon/PokemonImage';
 import PokemonTypes from '../types/PokemonTypes';
 import Select from 'react-select';
@@ -55,21 +56,20 @@ function EditPokemonModal({ setShowModal, teamName, idx, pokemon }) {
 
   return (
     <div
-      className="grid fixed top-0 left-0 w-screen h-screen z-[1]"
+      id="background"
+      className="grid place-items-center bg-slate-800/75 mt-5 backdrop-blur-sm fixed top-0 left-0 w-screen h-screen z-[1]"
       onClick={(e) => hideModal(e)}
     >
-      <div
-        id="background"
-        className="grid place-items-center bg-slate-800/80"
-      >
+      <div className="grid place-items-center p-5 bg-slate-800/5 mt-5 backdrop-blur-sm">
         <PokemonImage
           images={pokemon.sprites}
-          width={250}
-          height={250}
+          width={200}
+          height={200}
         />
         <PokemonTypes
           types={pokemon.types.map((type) => type.type.name)}
         />
+        <div>Ability</div>
         <div>
           <Select
             defaultValue={

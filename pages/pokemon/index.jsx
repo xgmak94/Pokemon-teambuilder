@@ -60,18 +60,66 @@ function PokemonHome() {
 
   return (
     <div className="flex flex-col justify-center">
-      <div className="flex self-center justify-center mt-5 w-3/5 text-black text-center text-4xl">
+      <div className="flex self-center justify-center my-5 w-3/5 text-center text-4xl">
         <Select
-          className="h-1/6 w-3/5 rounded-full text-black text-center text-4xl"
+          className="h-1/6 w-3/5 rounded-full text-center text-4xl"
           isMulti
           isOptionDisabled={() => filters.length >= 2}
           onChange={handleFilter}
           options={options}
+          styles={colorStyles}
+          placeholder={'Filter by type'}
         />
       </div>
       {filteredList()}
     </div>
   );
 }
+
+const colorStyles = {
+  option: (styles, { data }) => {
+    const color = typeColors[data.value];
+    return {
+      ...styles,
+      backgroundColor: color,
+    };
+  },
+  multiValue: (styles, { data }) => {
+    const color = typeColors[data.value];
+    return {
+      ...styles,
+      backgroundColor: color,
+    };
+  },
+  multiValueLabel: (styles, { data }) => {
+    const color = typeColors[data.value];
+    return {
+      ...styles,
+      color: data.color,
+    };
+  },
+};
+
+let typeColors = {
+  normal: '#A8A878',
+  fire: '#F08030',
+  fighting: '#C03028',
+  water: '#6890F0',
+  flying: '#A890F0',
+  grass: '#78C850',
+  poison: '#A040A0',
+  electric: '#F8D030',
+  ground: '#E0C068',
+  psychic: '#F85888',
+  rock: '#B8A038',
+  ice: '#98D8D8',
+  bug: '#A8B820',
+  dragon: '#7038F8',
+  ghost: '#705898',
+  dark: '#705848',
+  steel: '#B8B8D0',
+  fairy: '#EE99AC',
+  '???': '#68A090',
+};
 
 export default PokemonHome;

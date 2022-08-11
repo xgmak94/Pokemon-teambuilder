@@ -24,7 +24,7 @@ function PokemonPage() {
     ]
   );
 
-  const [evolution_chain, setEvolution_chain] = useState();
+  // const [evolution_chain, setEvolution_chain] = useState();
   const [imageModal, setImageModal] = useState(false);
   const [addToTeamModal, setAddToTeamModal] = useState(false);
 
