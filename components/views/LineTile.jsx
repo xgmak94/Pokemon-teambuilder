@@ -7,7 +7,15 @@ function LineTile({ pokemon }) {
   return (
     <span className="grid grid-cols-4 place-items-center ">
       <div>{padId(pokemon.id)}</div>
-      <PokemonImage images={pokemon.sprites} width={50} height={50} />
+      <Link href={`/pokemon/${pokemon.id}`}>
+        <div className="text-sm flex flex-col items-center justify-center cursor-pointer">
+          <PokemonImage
+            images={pokemon.sprites}
+            width={50}
+            height={50}
+          />
+        </div>
+      </Link>
       <Link href={`/pokemon/${pokemon.id}`}>
         <div className="capitalize cursor-pointer">
           {pokemon.name}

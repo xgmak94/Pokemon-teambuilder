@@ -19,7 +19,7 @@ function Home() {
       setFiltered([]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [search, view]);
+  }, [allPokemon, search, view]);
 
   function handleChange(e) {
     setSearch(e.target.value);
@@ -43,7 +43,7 @@ function Home() {
           onChange={(e) => handleChange(e)}
         />
       </div>
-      <div>{filteredList()}</div>
+      {filteredList()}
     </div>
   );
 }

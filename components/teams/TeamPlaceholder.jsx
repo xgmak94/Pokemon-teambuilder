@@ -4,7 +4,7 @@ import PokemonName from '../../components/pokemon/PokemonName';
 import PokemonTypes from '../../components/types/PokemonTypes';
 import Image from 'next/image';
 import SearchPokemonModal from '../modals/SearchPokemonModal';
-import Placeholder from '../../assets/placeholder.png';
+import Placeholder from '../../public/placeholder.png';
 
 function TeamPlaceholder({teamName}) {
   const [showSearchModal, setShowSearchModal] = useState(false);

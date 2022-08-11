@@ -4,10 +4,12 @@ import { useGlobalContext } from '../../components/GlobalStore';
 import PokemonImage from '../../components/pokemon/PokemonImage';
 import PokemonName from '../../components/pokemon/PokemonName';
 import PokemonTypes from '../../components/types/PokemonTypes';
+import Grid from '../../components/views/Grid';
+import Line from '../../components/views/Line';
 import Link from 'next/link';
 
 function AbilityPage() {
-  const { pokedex, allPokemon, allAbilities } = useGlobalContext();
+  const { view, allPokemon, allAbilities } = useGlobalContext();
   const router = useRouter();
   const { id } = router.query;
   const [ability, setAbility] = useState(
@@ -15,6 +17,7 @@ function AbilityPage() {
       allAbilities.findIndex((ability) => ability.name === id)
     ]
   );
+  const [filtered, setFiltered] = useState([]);
 
   useEffect(() => {
     setAbility(
@@ -22,58 +25,50 @@ function AbilityPage() {
         allAbilities.findIndex((ability) => ability.name === id)
       ]
     );
+    let allWithAbility = ability.pokemon
+      .map((pokemonWithAbility) => {
+        let index = allPokemon.findIndex(
+          (pokemon) =>
+            pokemon.name === pokemonWithAbility.pokemon.name
+        );
+
+        if (index === -1) {
+          return null;
+        }
+        let pokemon = allPokemon[index];
+        return pokemon;
+      })
+      .filter((pokemon) => {
+        return pokemon !== null;
+      });
+
+    setFiltered(allWithAbility);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allAbilities, id]);
 
-  function getPokemonWithAbility() {
-    let grid = ability.pokemon.map((pokemonWithAbility) => {
-      let index = allPokemon.findIndex(
-        (pokemon) => pokemon.name === pokemonWithAbility.pokemon.name
-      );
-
-      if (index === -1) {
-        return null;
-      }
-      let pokemon = allPokemon[index];
-      return (
-        <div key={pokemon.name} className="flex flex-col p-2">
-          <div className="flex flex-col justify-center">
-            <Link href={`../pokemon/${pokemon.id}`}>
-              <div className="flex cursor-pointer justify-center">
-                <PokemonImage
-                  images={pokemon.sprites}
-                  width={200}
-                  height={200}
-                />
-              </div>
-            </Link>
-          </div>
-          <div className="flex flex-row justify-center">
-            <PokemonName name={pokemon.name} />
-          </div>
-          <PokemonTypes
-            types={pokemon.types.map((type) => type.type.name)}
-          />
-        </div>
-      );
-    });
-    return <div className="grid grid-cols-5 w-11/12">{grid}</div>;
+  function filteredList() {
+    if (view) {
+      return <Grid filtered={filtered} />;
+    } else {
+      return <Line filtered={filtered} />;
+    }
   }
 
   return (
     <>
       {ability && (
-        <div className="flex flex-col items-center">
-          <div className="capitalize text-lg font-bold">
+        <div className="flex flex-col">
+          <div className="capitalize self-center text-lg font-bold">
             {ability.name.split('-').join(' ')}
           </div>
-          <div>
+          <div className="p-5">
             {ability.effect_entries.map((entry) => {
               if (entry.language.name === 'en') {
                 return <div key={entry.effect}>{entry.effect}</div>;
               }
             })}
           </div>
-          <div>{getPokemonWithAbility()}</div>
+          <div>{filteredList()}</div>
         </div>
       )}
     </>

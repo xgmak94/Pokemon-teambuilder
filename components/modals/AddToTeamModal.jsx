@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { useGlobalContext } from '../GlobalStore';
 import CreatableSelect from 'react-select/creatable';
+import Select from 'react-select';
 
 function AddTeamModal({ pokemonName, setShowModal }) {
-  let { teams } = useGlobalContext();
+  let { teams, setTeams } = useGlobalContext();
 
   let options = [
     { value: 'chocolate', label: 'chocolate' },
@@ -46,7 +47,7 @@ function AddTeamModal({ pokemonName, setShowModal }) {
     }
   }
 
-  function addTeam(e) {
+  function addTeam() {
     if (selectedTeam === null || selectedTeam === '') return;
     setTeams((prev) => {
       let obj = {
@@ -56,15 +57,22 @@ function AddTeamModal({ pokemonName, setShowModal }) {
         obj[selectedTeam] = [];
       }
       //can do error checking on length of array < 6
-      obj[selectedTeam].push(pokemonName);
+      obj[selectedTeam].push({
+        name: pokemonName,
+      });
       return obj;
     });
     setShowModal(false);
   }
 
+  function handleEnter(e) {
+    if(e.code === 'Enter') {
+      addTeam();
+    }
+  }
   return (
     <div
-      className="grid fixed w-screen h-screen z-[1]"
+      className="grid fixed top-0 w-screen h-screen z-[1]"
       onClick={(e) => hideModal(e)}
     >
       <div
@@ -72,7 +80,7 @@ function AddTeamModal({ pokemonName, setShowModal }) {
         className="grid place-items-center bg-slate-800/80"
       >
         <div className="grid place-items-center">
-          <div className="flex flex-col justify-center text-center">
+          <div className="flex flex-col text-xl justify-center text-center">
             <div>{`Select the team `}</div>
             <div className="capitalize">{`${pokemonName}`}</div>
           </div>
@@ -82,9 +90,10 @@ function AddTeamModal({ pokemonName, setShowModal }) {
             onChange={selectingTeam}
             onInputChange={selectingTeam}
             options={options}
+            onKeyDown={e => handleEnter(e)}
           />
           <button
-            className="rounded-lg w-[10vw] bg-slate-700"
+            className="rounded-full h-[10vh] w-[25vw] text-xl bg-slate-700"
             onClick={(e) => addTeam(e)}
           >
             Confirm

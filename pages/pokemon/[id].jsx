@@ -10,7 +10,7 @@ import StatBreakdown from '../../components/stats/StatBreakdown';
 import Forms from '../../components/forms/Forms';
 import NavBar from '../../components/header/NavBar';
 import ImageModal from '../../components/modals/ImageModal';
-import TeamModal from '../../components/modals/TeamModal';
+import AddToTeamModal from '../../components/modals/AddToTeamModal';
 import Link from 'next/link';
 
 function PokemonPage() {
@@ -26,7 +26,7 @@ function PokemonPage() {
 
   const [evolution_chain, setEvolution_chain] = useState();
   const [imageModal, setImageModal] = useState(false);
-  const [teamModal, setTeamModal] = useState(false);
+  const [addToTeamModal, setAddToTeamModal] = useState(false);
 
   useEffect(() => {
     let index = allPokemon.findIndex(
@@ -61,7 +61,7 @@ function PokemonPage() {
   }
 
   function handleTeam() {
-    setTeamModal((prev) => !prev);
+    setAddToTeamModal((prev) => !prev);
   }
 
   function displayImageModal() {
@@ -78,15 +78,15 @@ function PokemonPage() {
     );
   }
 
-  function displayTeamModal() {
+  function displayAddToTeamModal() {
     return (
       pokemon &&
-      teamModal && (
-        <TeamModal
+      addToTeamModal && (
+        <AddToTeamModal
           pokemonName={pokemon.name}
           width={500}
           height={500}
-          setShowModal={setTeamModal}
+          setShowModal={setAddToTeamModal}
         />
       )
     );
@@ -95,7 +95,7 @@ function PokemonPage() {
   return (
     <>
       {displayImageModal()}
-      {displayTeamModal()}
+      {displayAddToTeamModal()}
       {pokemon && (
         <>
           <div className="flex flex-col p-2">

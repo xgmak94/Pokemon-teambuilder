@@ -9,12 +9,15 @@ function PokemonHome() {
   const [filtered, setFiltered] = useState(allPokemon);
   const [filters, setFilters] = useState([]);
 
-  let options = allTypes.slice(0, 18).map((type) => {
-    return {
-      value: type.name,
-      label: type.name[0].toUpperCase() + type.name.slice(1),
-    };
-  });
+  let options = allTypes
+    .slice(0, 18)
+    .map((type) => {
+      return {
+        value: type.name,
+        label: type.name[0].toUpperCase() + type.name.slice(1),
+      };
+    })
+    .sort((a, b) => a.value.localeCompare(b.value));
 
   useEffect(() => {
     if (filters.length === 0) {
@@ -66,7 +69,7 @@ function PokemonHome() {
           options={options}
         />
       </div>
-      <div>{filteredList()}</div>
+      {filteredList()}
     </div>
   );
 }

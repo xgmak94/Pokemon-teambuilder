@@ -1,7 +1,7 @@
 import React from 'react';
 
 function TeamName({ name }) {
-  return <div>{name}</div>;
+  return <div className="text-xl">{name}</div>;
 }
 
 export default TeamName;

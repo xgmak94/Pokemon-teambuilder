@@ -1,11 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
-import PokemonGrid from '../grid/PokemonGrid';
 import { useGlobalContext } from '../GlobalStore';
-import Link from 'next/link';
 import PokemonTypes from '../types/PokemonTypes';
 import PokemonProfile from '../pokemon/PokemonProfile';
 import PokemonImage from '../pokemon/PokemonImage';
+import Link from 'next/link';
 
 function SearchPokemonModal({ teamName, setShowModal }) {
   const { allPokemon, teams, setTeams } = useGlobalContext();
@@ -17,12 +16,14 @@ function SearchPokemonModal({ teamName, setShowModal }) {
   }
 
   function handleClick(e, pokemonName) {
-    console.log('clicked', pokemonName, ` for team ${teamName}`);
     setTeams((prev) => {
       let obj = {
         ...prev,
-      }
-      obj[teamName].push(pokemonName);
+      };
+      obj[teamName].push({
+        name: pokemonName,
+        moves: [],
+      });
       return obj;
     });
     setShowModal(false);
@@ -41,7 +42,7 @@ function SearchPokemonModal({ teamName, setShowModal }) {
           <div className="grid grid-cols-5 w-11/12">
             {allPokemon.map((pokemon) => {
               return (
-                <div key={pokemon}>
+                <div key={pokemon.name}>
                   {' '}
                   <div className="text-sm flex flex-col p-2.5 items-center justify-center">
                     <div
