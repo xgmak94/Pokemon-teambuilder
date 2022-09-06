@@ -3,6 +3,13 @@ This is a full-stack application that displays information about all pokemon. Po
 
 ## Getting Started
 
+Initialize the database:
+
+```bash
+node ./server/database/data/pokemon.js
+node ./server/database/data/ability.js
+node ./server/database/data/type.js
+```
 Create a dev build:
 
 ```bash

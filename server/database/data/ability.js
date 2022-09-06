@@ -31,4 +31,4 @@ addAll = async function (limit, offset) {
   });
 };
 
-// addAll(numAbilities, 0);
+addAll(numAbilities, 0);

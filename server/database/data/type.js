@@ -36,5 +36,4 @@ addAll = async function (limit, offset) {
   });
 };
 
-
-module.exports = addAll;
+addAll();
