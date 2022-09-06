@@ -3,11 +3,16 @@ import React from 'react';
 import { GlobalContextProvider } from '../components/GlobalStore';
 import NavBar from '../components/header/NavBar';
 import { useRouter } from 'next/router';
+import Head from 'next/head'
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   return (
+
     <GlobalContextProvider>
+      <Head>
+        <title>Pokemon</title>
+      </Head>
       <NavBar />
       {router.pathname !== '/' ? (
         <button

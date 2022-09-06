@@ -4,7 +4,7 @@ import { useGlobalContext } from '../GlobalStore';
 import CreatableSelect from 'react-select/creatable';
 import Select from 'react-select';
 
-function AddTeamModal({ pokemonName, setShowModal }) {
+function AddTeamModal({ pokemon, setShowModal }) {
   let { teams, setTeams } = useGlobalContext();
 
   let options = [
@@ -58,7 +58,8 @@ function AddTeamModal({ pokemonName, setShowModal }) {
       }
       //can do error checking on length of array < 6
       obj[selectedTeam].push({
-        name: pokemonName,
+        name: pokemon.name,
+        moves: new Array(4),
       });
       return obj;
     });
@@ -81,7 +82,7 @@ function AddTeamModal({ pokemonName, setShowModal }) {
         <div className="grid place-items-center">
           <div className="flex flex-col text-xl justify-center text-center">
             <div>{`Select the team `}</div>
-            <div className="capitalize">{`${pokemonName}`}</div>
+            <div className="capitalize">{`${pokemon.name}`}</div>
           </div>
           <CreatableSelect
             className="w-[20vw] text-black m-5 bg-slate-500"

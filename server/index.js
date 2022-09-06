@@ -11,7 +11,7 @@ app.use(morgan('tiny'));
 
 app.use('/', routes);
 
-let port = process.env.PORT || 3001;
+let port = process.env.PORT || 3002;
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import Pokedex from 'pokedex-promise-v2';
 
-const SERVER_URL = 'http://localhost:3001';
+const SERVER_URL = 'http://localhost:3002';
 const NUM_POKEMON = 898; //151 || 898
 
 export const GlobalContext = React.createContext();
@@ -43,6 +43,7 @@ export function GlobalContextProvider({ children }) {
       let results = await axios.get(`${SERVER_URL}/pokemon`, {
         params: { limit: NUM_POKEMON },
       });
+      console.log(results);
       setAllPokemon(results.data);
     }
 
@@ -75,7 +76,6 @@ export function GlobalContextProvider({ children }) {
       view,
       setView,
       pokedex,
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     };
   }, [allPokemon, allAbilities, allTypes, teams, view]);
 

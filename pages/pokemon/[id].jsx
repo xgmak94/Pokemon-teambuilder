@@ -83,7 +83,7 @@ function PokemonPage() {
       pokemon &&
       addToTeamModal && (
         <AddToTeamModal
-          pokemonName={pokemon.name}
+          pokemon={pokemon}
           width={500}
           height={500}
           setShowModal={setAddToTeamModal}
